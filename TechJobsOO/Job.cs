@@ -13,7 +13,63 @@ namespace TechJobsOO
         public CoreCompetency JobCoreCompetency { get; set; }
 
         // TODO: Add the two necessary constructors.
+        public Job()
+        {
+            Id = nextId;
+            nextId++;
+        }
+
+        public Job(string name, Employer employerName, Location employerLocation, PositionType jobType, CoreCompetency jobCoreCompetency) : this()
+        {
+            Name = name;
+            EmployerName = employerName;
+            EmployerLocation = employerLocation;
+            JobType = jobType;
+            JobCoreCompetency = jobCoreCompetency;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Job job &&
+                   Id == job.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
 
         // TODO: Generate Equals() and GetHashCode() methods.
+
+        public override string ToString()
+        {
+            if(Name == null)
+            {
+                return "OOPS! This job does not seem to exist.";
+            }
+
+            if(Name == "")
+            {
+                Name = "Data not available";
+            }
+            if(EmployerName.Value == "")
+            {
+                EmployerName.Value = "Data not available";
+            }
+            if(EmployerLocation.Value == "")
+            {
+                EmployerLocation.Value = "Data not available";
+            }
+            if(JobType.Value == "")
+            {
+                JobType.Value = "Data not available";
+            }
+            if(JobCoreCompetency.Value == "")
+            {
+                JobCoreCompetency.Value = "Data not available";
+            }
+            
+            return "ID: " + Id + "\nName: " + Name + "\nEmployer: "+EmployerName.Value+"\nLocation: "+EmployerLocation.Value+"\nPosition Type: "+JobType.Value+"\nCore Competency: "+JobCoreCompetency.ToString();
+        }
     }
 }
